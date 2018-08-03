@@ -1,0 +1,131 @@
+---
+title: "Data Visualization and Analysis on Iris Dataset with R"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+---
+<h1>Importing Libraries</h1>
+```{r}
+library(datasets)
+library(ggplot2)
+library(plotly)
+```
+
+
+<h1>Importing Dataset</h1>
+
+
+```{r}
+data("iris")
+str(iris)
+```
+
+The dataset contains 4 feature variables and 1 target variable (Species). All features are continuous variables
+whereas target variable is categorical. 
+
+---
+
+<h1>Pre-processing</h1>
+
+<h2>Checking Null data</h2>
+No null data were found in all variables.
+
+```{r}
+sapply(iris, function(x) sum(is.na(x)))
+```
+
+<h2>Checking Outliers</h2>
+
+```{r}
+box_plot_petal_width <- plot_ly(ggplot2::diamonds, type = "box", boxpoints = 'suspectedoutliers', jitter = 0.3) %>%
+      #layout(title = "Petal Width (cm)") %>%
+      layout( annotations = list(
+                  text = "Petal Width (cm)",
+                  xref = "paper",
+                  yref = "paper",
+                  yanchor = "bottom",
+                  xanchor = "center",
+                  align = "center",
+                  x = 0.5,
+                  y = 0
+                )
+      ) %>%
+      add_boxplot(y = iris$Petal.Width[iris$Species == "setosa"], name = "Setosa") %>%
+      add_boxplot(y = iris$Petal.Width[iris$Species == "versicolor"], name = "Versicolor") %>%
+      add_boxplot(y = iris$Petal.Width[iris$Species == "virginica"], name = "Virginica")
+
+box_plot_petal_length <- plot_ly(ggplot2::diamonds, type = "box", boxpoints = 'suspectedoutliers', jitter = 0.3) %>%
+      layout( annotations = list(
+                  text = "Petal Length (cm)",
+                  xref = "paper",
+                  yref = "paper",
+                  yanchor = "bottom",
+                  xanchor = "center",
+                  align = "center",
+                  x = 0.5,
+                  y = 1
+                )
+      ) %>%
+      add_boxplot(y = iris$Petal.Length[iris$Species == "setosa"], name = "Setosa") %>%
+      add_boxplot(y = iris$Petal.Length[iris$Species == "versicolor"], name = "Versicolor") %>%
+      add_boxplot(y = iris$Petal.Length[iris$Species == "virginica"], name = "Virginica")
+
+box_plot_sepal_width <- plot_ly(ggplot2::diamonds, type = "box", boxpoints = 'suspectedoutliers', jitter = 0.3) %>%
+      layout(annotations = list(
+                  text = "Sepal Width (cm)",
+                  xref = "paper",
+                  yref = "paper",
+                  yanchor = "bottom",
+                  xanchor = "center",
+                  align = "center",
+                  x = 0.5,
+                  y = 1
+                )
+      ) %>%
+      add_boxplot(y = iris$Sepal.Width[iris$Species == "setosa"], name = "Setosa") %>%
+      add_boxplot(y = iris$Sepal.Width[iris$Species == "versicolor"], name = "Versicolor") %>%
+      add_boxplot(y = iris$Sepal.Width[iris$Species == "virginica"], name = "Virginica")
+      
+box_plot_sepal_length <- plot_ly(ggplot2::diamonds, type = "box", boxpoints = 'suspectedoutliers', jitter = 0.3) %>%
+      layout(annotations = list(
+                  text = "Sepal Length (cm)",
+                  xref = "paper",
+                  yref = "paper",
+                  align = "center",
+                  x = 0.5,
+                  y = 0.9
+                )
+      ) %>%
+      add_boxplot(y = iris$Sepal.Length[iris$Species == "setosa"], name = "Setosa") %>%
+      add_boxplot(y = iris$Sepal.Length[iris$Species == "versicolor"], name = "Versicolor") %>%
+      add_boxplot(y = iris$Sepal.Length[iris$Species == "virginica"], name = "Virginica")
+
+# Plotting all visualizations with Grid
+# annotations
+
+subplot(box_plot_petal_length,
+         box_plot_petal_width,
+         box_plot_sepal_length,
+         box_plot_sepal_width,
+         nrows = 2,
+         margin = 0.08,
+        titleX = TRUE) %>%
+        layout(showlegend = FALSE)
+
+
+```
+
