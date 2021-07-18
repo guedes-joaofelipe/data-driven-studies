@@ -1,3 +1,6 @@
 /Datasets/
 *.ipynb_checkpoints
 *.gdoc
+
+# C object files
+*.o
