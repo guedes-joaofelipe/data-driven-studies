@@ -1,0 +1,1 @@
+Exercises from coursera`s `Deep Neural Networks with Pytorch`
