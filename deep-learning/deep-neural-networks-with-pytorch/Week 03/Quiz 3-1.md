@@ -132,4 +132,40 @@ yhat=sig(z)
 yhat= torch.sigmoid(z)
 ```
 
+--------
 
+## 3.6 Bernoulli Distribution and Maximum Likelihood Estimation
+
+1. An example of a Bernoulli Distributed variable is :
+
+
+- >The face of a coin  after a flip 
+- Height of a person  
+
+
+2. The log likelihood function is given by
+
+- $\Pi_{n=1}^N \theta^{y_n}(1-\theta)^{1-y_n}$
+- >$\sum_{n=1}^N y_n \ln (\theta) + (1-y_n) \ln (1-\theta)$
+
+---------
+
+## 3.7 Logistic Regression Cross Entropy Loss
+
+1. Whats the problem with obtaining the parameters for Logistic Regression and mean squared error     
+
+- >during training, you may not reach the minimum of the cost surface     
+- nothing, you should always use the mean squared error 
+
+
+2. What is the PyTorch function you  would use for  training  Logistic regression with Cross Entropy .     
+
+- >This
+```python
+nn.BCELoss()
+```
+
+-
+```python
+nn.MSELoss()
+```
