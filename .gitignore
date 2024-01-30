@@ -20,3 +20,5 @@ deep-learning/.DS_Store
 *.parquet
 *.tsv
 *.zip
+*.pyc
+*.vec
