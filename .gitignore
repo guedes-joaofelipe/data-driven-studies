@@ -6,3 +6,17 @@
 *.o
 *.DS_Store
 deep-learning/.DS_Store
+*.csv
+*.txt
+*.h5
+*.wav
+*.json
+*.npy
+*.gz
+*.pth
+*-ubyte
+*.pkl
+*/mlruns
+*.parquet
+*.tsv
+*.zip
